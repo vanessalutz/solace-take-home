@@ -1,5 +1,4 @@
-import db from "..";
-import { advocates } from "../schema";
+//Data is inserted with curl -X POST http://localhost:3000/api/seed
 
 const specialties = [
   "Bipolar",
