@@ -19,7 +19,7 @@
 **Missing Search Fields:**
 - **Phone Number:** Cannot search by phone number (removed from ui-improvements for UX)
 - **Degree:** ~~Cannot search by degree type (MD, PhD, MSW)~~ **IMPLEMENTED** 
-- **Current:** Searches firstName, lastName, city, **degree**, specialties (phone & years search removed for better UX)
+- **Current:** Searches firstName, lastName, city, degree, specialties, phone and yearsOfExperience
 
 ### 2. User Experience Improvements (Out of Scope)
 
@@ -36,13 +36,6 @@
 - **Search History:** Recent searches
 - **Auto-complete:** Auto-suggestions
 
-**Styling:**
-- **Tailwind:** Installed but didn't utilize
-- **Basic HTML table:** Nonresponsive
-- **No Visual Hierarchy or Accessibility:** Same text and look
-- **Inconsistent Spacing:** poor look with spacing issues
-- **Mobile:** No consideration for mobile
-- **No Hover or Loading States:** No interactiveness or responsiveness
 
 ### 3. API Enhancements (Out of Scope)
 
@@ -127,7 +120,8 @@ GET /api/advocates?sortBy=yearsOfExperience&order=desc
 - Prioritized working database over search perfection
 - Chose simple text search over advanced filters
 - Skipped testing to deliver working features
-- Skipped any UI/UX enhancements as I am more backend driven, although I am fullstack.
+- Initially skipped UI/UX enhancements as I am more backend driven, although I am fullstack
+- **Later added comprehensive UI/UX improvements with Claude Code's assistance** in ui-improvements branch
 
 **Quality vs Speed Trade-offs:**
 - Search functionality works but has edge cases
