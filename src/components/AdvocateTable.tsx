@@ -21,7 +21,9 @@ export default function AdvocateTable({ advocates }: AdvocateTableProps) {
         advocate.lastName.toLowerCase().includes(lowerSearchTerm) ||
         advocate.city.toLowerCase().includes(lowerSearchTerm) ||
         advocate.degree.toLowerCase().includes(lowerSearchTerm) ||
-        advocate.specialties.some(specialty => specialty.toLowerCase().includes(lowerSearchTerm))
+        advocate.specialties.some(specialty => specialty.toLowerCase().includes(lowerSearchTerm)) ||
+        advocate.yearsOfExperience.toString().includes(trimmedSearch) ||
+        advocate.phoneNumber.toString().includes(trimmedSearch)
       );
     });
   }, [advocates, searchTerm]);
@@ -40,7 +42,7 @@ export default function AdvocateTable({ advocates }: AdvocateTableProps) {
             <input
               id="search"
               type="text"
-              placeholder="Search by name, location, specialty, or credentials..."
+              placeholder="Search by name, location, specialty, credentials, experience, or phone..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
