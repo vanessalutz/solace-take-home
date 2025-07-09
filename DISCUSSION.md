@@ -11,18 +11,15 @@
 - **Solution:** Exact match or range-based search for numeric fields
 
  **Whitespace Handling:**
-  - **Issue:** No trimming of search input or data
-  fields
+  - **Issue:** ~~No trimming of search input or data fields~~ **IMPLEMENTED**
   - **Impact:** "  john  " won't match "John", poor UX
-  - **Solution:** Trim search input and optionally data
-  fields
-
-  For time constraints: I thought about this as I was pushing the PR and given the time constraints, I opted not to implement this.
+  - **Solution:** ~~Trim search input and optionally data fields~~ **COMPLETED**
+  - **Implementation:** Added `trimmedSearch = searchTerm.trim()` in ui-improvements branch
 
 **Missing Search Fields:**
-- **Phone Number:** Cannot search by phone number (not included in search filter)
-- **Degree:** Cannot search by degree type (MD, PhD, MSW)
-- **Current:** Only searches firstName, lastName, city, specialties, and years (with the issue referenced above)
+- **Phone Number:** Cannot search by phone number (removed from ui-improvements for UX)
+- **Degree:** ~~Cannot search by degree type (MD, PhD, MSW)~~ **IMPLEMENTED** 
+- **Current:** Searches firstName, lastName, city, **degree**, specialties (phone & years search removed for better UX)
 
 ### 2. User Experience Improvements (Out of Scope)
 
