@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Advocate } from "../types/advocate";
 
 export default function Home() {
   const [advocates, setAdvocates] = useState<Advocate[]>([]);
-  const [filteredAdvocates, setFilteredAdvocates] = useState<Advocate[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
@@ -13,34 +12,33 @@ export default function Home() {
     fetch("/api/advocates").then((response) => {
       response.json().then((jsonResponse) => {
         setAdvocates(jsonResponse.data);
-        setFilteredAdvocates(jsonResponse.data);
       });
     });
   }, []);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchValue = e.target.value;
-    setSearchTerm(searchValue);
-
-    const filteredAdvocates = advocates.filter((advocate: Advocate) => {
-      const lowerSearchTerm = searchValue.toLowerCase();
+  const filteredAdvocates = useMemo(() => {
+    if (!searchTerm) return advocates;
+    
+    return advocates.filter((advocate: Advocate) => {
+      const lowerSearchTerm = searchTerm.toLowerCase();
       return (
         advocate.firstName.toLowerCase().includes(lowerSearchTerm) ||
         advocate.lastName.toLowerCase().includes(lowerSearchTerm) ||
         advocate.city.toLowerCase().includes(lowerSearchTerm) ||
         advocate.degree.toLowerCase().includes(lowerSearchTerm) ||
         advocate.specialties.some(specialty => specialty.toLowerCase().includes(lowerSearchTerm)) ||
-        advocate.yearsOfExperience.toString().includes(searchValue)
+        advocate.yearsOfExperience.toString().includes(searchTerm)
       );
     });
+  }, [advocates, searchTerm]);
 
-    setFilteredAdvocates(filteredAdvocates);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
   const onClick = () => {
     console.log(advocates);
     setSearchTerm("");
-    setFilteredAdvocates(advocates);
   };
 
   return (
