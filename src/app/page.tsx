@@ -6,6 +6,7 @@ import { Advocate } from "../types/advocate";
 export default function Home() {
   const [advocates, setAdvocates] = useState<Advocate[]>([]);
   const [filteredAdvocates, setFilteredAdvocates] = useState<Advocate[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     console.log("fetching advocates...");
@@ -18,19 +19,18 @@ export default function Home() {
   }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = e.target.value;
-
-    document.getElementById("search-term").innerHTML = searchTerm;
+    const searchValue = e.target.value;
+    setSearchTerm(searchValue);
 
     const filteredAdvocates = advocates.filter((advocate: Advocate) => {
-      const lowerSearchTerm = searchTerm.toLowerCase();
+      const lowerSearchTerm = searchValue.toLowerCase();
       return (
         advocate.firstName.toLowerCase().includes(lowerSearchTerm) ||
         advocate.lastName.toLowerCase().includes(lowerSearchTerm) ||
         advocate.city.toLowerCase().includes(lowerSearchTerm) ||
         advocate.degree.toLowerCase().includes(lowerSearchTerm) ||
         advocate.specialties.some(specialty => specialty.toLowerCase().includes(lowerSearchTerm)) ||
-        advocate.yearsOfExperience.toString().includes(searchTerm)
+        advocate.yearsOfExperience.toString().includes(searchValue)
       );
     });
 
@@ -39,6 +39,7 @@ export default function Home() {
 
   const onClick = () => {
     console.log(advocates);
+    setSearchTerm("");
     setFilteredAdvocates(advocates);
   };
 
@@ -50,9 +51,13 @@ export default function Home() {
       <div>
         <p>Search</p>
         <p>
-          Searching for: <span id="search-term"></span>
+          Searching for: <span>{searchTerm}</span>
         </p>
-        <input style={{ border: "1px solid black" }} onChange={onChange} />
+        <input 
+          style={{ border: "1px solid black" }} 
+          value={searchTerm}
+          onChange={onChange} 
+        />
         <button onClick={onClick}>Reset Search</button>
       </div>
       <br />
