@@ -10,6 +10,15 @@
 - **Impact:** Poor user experience can lead to confusion - searching for junior advocates (1-2 years) returns senior advocates
 - **Solution:** Exact match or range-based search for numeric fields
 
+ **Whitespace Handling:**
+  - **Issue:** No trimming of search input or data
+  fields
+  - **Impact:** "  john  " won't match "John", poor UX
+  - **Solution:** Trim search input and optionally data
+  fields
+
+  For time constraints: I thought about this as I was pushing the PR and given the time constraints, I opted not to implement this.
+
 **Missing Search Fields:**
 - **Phone Number:** Cannot search by phone number (not included in search filter)
 - **Degree:** Cannot search by degree type (MD, PhD, MSW)
